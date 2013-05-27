@@ -1,0 +1,53 @@
+\documentclass[10pt,a4paper]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\author{Dainius Jocas}
+\title{In the Dalvik}
+\begin{document}
+\maketitle
+
+The Dalvik Virtual Machine is the heart of Android. It's a fast, just-in-time compiled, optimized bytecode virtual machine. Android applications are compiled to Dalvik bytecode and run on the Dalvik VM. This section includes detailed information such as the Dalvik bytecode format specification, design information on the VM itself, and so on.
+
+Dalvik is the managed runtime used by applications and some system services on Android. Dalvik was originally created specifically for the Android project.
+
+Today we are going to start to look at the code which is at the very core of Dalvik VM (Virtual Machine). To be more specific, we are going to talk about Android's run-time system, whose core part is the Dalvik VM. 
+
+By definition run-time system is a software designed to support the execution of computer programs. Intuitively, we can think of a runtime as a set of libraries that is responsible for low level tasks, e.g. dynamic memory allocation in C. In addition to the basic low-level tasks of the program, a runtime system may also implement higher-level behaviour and even support type checking, debugging, or code generation and optimization. Dalvik as a runtime, besides providing low-level libraries, implements lots of higher-level functionality, e.g. type checking.
+
+To investigate implementation of Dalvik, means to investigate an implementation of the run-time system. And, therefore, to investigate the implementation of the run-time system means to investigate the implementation of a set of tools of the run-time system, e.g. dexopt -- a tool which verifies and optimizes all of the classes in the DEX file.
+
+Dalvik project, at the source code level, is a rich set of tools:
+\begin{itemize}
+  \item dalvikvm --  program to support a command-line invocation of the Dalvik VM.
+  \item dexdump -- this tool is intended to mimic "objdump". Objdump displays information about one or more object files.
+  \item dexgen -- the dex code generator project. It provides API for creating dex classes in runtime which is needed e.g. for class mocking.
+  \item dexlist -- tool that lists all methods in all concrete classes in one or more DEX files.
+  \item dexopt -- a tool which verifies and optimizes all of the classes in the DEX file.
+  \item dx -- Dalvik eXchange, the thing that takes in class files and reformulates them for consumption in the VM.
+  \item libdex -- tool which is responsible for accessing .dex (Dalvik Executable Format) files.
+  \item opcode-gen -- set of scripts for modification of opcodes.
+  \item tools -- This tool runs a host build of dalvikvm in order to preoptimize dex files that will be run on a device.
+  \begin{itemize}
+    \item dexdeps -- DEX external dependency dump. This tool dumps a list of fields and methods that a DEX file uses but does not define.
+    \item dmtracedump -- is a tool that gives you an alternate way of generating graphical call-stack diagrams from trace log files (instead of using Traceview).
+    \item gdbjithelper -- kind of disassembler.
+    \item hprof-conv -- tool to strip Android-specific records out of hprof data.
+  \end{itemize}
+  \item vm -- actual implementation of a VM:
+  \begin{itemize}
+    \item alloc -- Garbage-collecting memory allocator.
+    \item analysis -- Dalvik bytecode structural verifier. 
+    \item compiler --
+    \item hprof -- Preparation and completion of hprof data generation. 
+    \item interp -- Main interpreter entry point and support functions.
+    \item jdwp -- Java Debug Wire Protocol support. Prints a list of available JDWP processes on a given device. 
+    \item mterp -- the opcode interpreter
+    \item static opcode check;
+    \item ...
+  \end{itemize}
+\end{itemize}
+
+As for today, we'll see what happens, when a new VM is created.
+\end{document}

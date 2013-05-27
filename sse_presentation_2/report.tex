@@ -1,0 +1,28 @@
+\documentclass[10pt,a4paper,draft]{article}
+\usepackage[utf8]{inputenc}
+\usepackage{amsmath}
+\usepackage{amsfonts}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\author{Dainius Jocas}
+\title{Dalvik and Design Patterns}
+\begin{document}
+
+Let's talk about reflection in android.
+
+Reflection gives developers the flexibility to inspect and determine API characteristics at runtime, instead of compile time. Within the security constraints imposed by Java (e.g. use of public, protected, private), you can then construct objects, access fields, and invoke methods dynamically. The Java Reflection APIs are available as part of the java.lang.reflect package, which is included within the Android SDK for developers to use.
+%% http://mobile.tutsplus.com/tutorials/android/java-reflection/
+
+The \textit{core reflection facility}, \texttt{java.lang.reflect}, offers programmatic access to
+information about loaded classes.
+
+TODO for today:
+\begin{itemize}
+  \item Hooks -- A hook is functionality provided by software for users of that software to have their own code called under certain circumstances. That code can augment or replace the current code. In a generic sense, a "hook" is something that will let you, a programmer, view and/or interact with and/or change something that's already going on in a system/program.
+  \item extension points - 
+  \item inversion of control - high level modules simply should not depend upon low level modules. High level modules are ones to be reused. This principle is at the very heart of framework design.
+  \item dependency injection - in OO, a central program normally controls other objects in a module, library, or framework. With dependency injection, this pattern is inverted -- a reference to a service is placed directly into the object which eases testing and modularity.
+\end{itemize}
+
+Let's talk about the overall process of starting an application: http://stackoverflow.com/questions/9153166/understanding-android-zygote-and-dalvikvm
+\end{document}
